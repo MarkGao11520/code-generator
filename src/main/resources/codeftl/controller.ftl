@@ -1,83 +1,55 @@
 package ${basePackage}.controller;
-
-import ${entityPackage}.${modelNameUpperCamel};
-import ${servicePackage}.${modelNameUpperCamel}Service;
-
-import com.isoft.sys.user.entity.User;
-import com.isoft.common.model.PersistModel;
-import com.isoft.sys.util.UserUtils;
-import com.isoft.common.constant.MessageConstant;
-import com.isoft.common.message.AjaxResponse;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import ${corePackage}.Result;
+import ${corePackage}.ResultGenerator;
+import ${basePackage}.entity.${modelNameUpperCamel};
+import ${basePackage}.service.${modelNameUpperCamel}Service;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.ResponseBody;
-import com.isoft.common.controller.PaginationController;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 /**
 * Created by ${author} on ${date}.
 */
-@Controller
-@RequestMapping("/${modelNameUpperCamel}")
-public class ${modelNameUpperCamel}Controller extends PaginationController<${modelNameUpperCamel}>{
+@RestController
+@RequestMapping("${baseRequestMapping}")
+public class ${modelNameUpperCamel}Controller {
     @Autowired
     private ${modelNameUpperCamel}Service ${modelNameLowerCamel}Service;
 
-    /**
-    * 插入
-    * @param ${modelNameLowerCamel}
-    * @param ar
-    * @return
-    */
-    @RequestMapping("/add")
-    @ResponseBody
-    public AjaxResponse add(${modelNameUpperCamel} ${modelNameLowerCamel},AjaxResponse ar) {
-        PersistModel result = ${modelNameLowerCamel}Service.persist(${modelNameLowerCamel});
-        ar.setSuccessMessage(MessageConstant.MESSAGE_ALERT_SUCCESS,result);
-        return ar;
+    @PostMapping("/add")
+    public Result add(${modelNameUpperCamel} ${modelNameLowerCamel}) {
+        ${modelNameLowerCamel}Service.save(${modelNameLowerCamel});
+        return ResultGenerator.genSuccessResult();
     }
 
-    /**
-    * 根据主键唯一查找
-    * @param businessId
-    * @param ar
-    * @return
-    */
-    @RequestMapping("/one")
-    @ResponseBody
-    public AjaxResponse queryOne(String businessId,AjaxResponse ar) {
-        ar.setSuccessMessage(MessageConstant.MESSAGE_ALERT_SUCCESS,${modelNameLowerCamel}Service.selectOne(businessId));
-        return ar;
+    @PostMapping("/delete")
+    public Result delete(Integer id) {
+        ${modelNameLowerCamel}Service.deleteById(id);
+        return ResultGenerator.genSuccessResult();
     }
 
-
-    /**
-    * 根据条件分页查询
-    * @param param
-    * @param ar
-    * @return
-    */
-    @RequestMapping("/query${modelNameUpperCamel}sByPagination")
-    @ResponseBody
-    public AjaxResponse query${modelNameUpperCamel}sByPagination(${modelNameUpperCamel} param,AjaxResponse ar) {
-        param.setCreateBy(UserUtils.getUser().getBusinessId());
-        ar.setSuccessMessage(MessageConstant.MESSAGE_ALERT_SUCCESS,${modelNameLowerCamel}Service.query${modelNameUpperCamel}sByPagination(getPaginationUtility(),param));
-        return ar;
+    @PostMapping("/update")
+    public Result update(${modelNameUpperCamel} ${modelNameLowerCamel}) {
+        ${modelNameLowerCamel}Service.update(${modelNameLowerCamel});
+        return ResultGenerator.genSuccessResult();
     }
 
-    /**
-    * 根据条件查询
-    * @param param
-    * @param ar
-    * @return
-    */
-    @RequestMapping("/query${modelNameUpperCamel}s")
-    @ResponseBody
-    public AjaxResponse query${modelNameUpperCamel}s(${modelNameUpperCamel} param,AjaxResponse ar) {
-        param.setCreateBy(UserUtils.getUser().getBusinessId());
-        ar.setSuccessMessage(MessageConstant.MESSAGE_ALERT_SUCCESS,${modelNameLowerCamel}Service.query${modelNameUpperCamel}s(param));
-        return ar;
+    @PostMapping("/detail")
+    public Result detail(Integer id) {
+        ${modelNameUpperCamel} ${modelNameLowerCamel} = ${modelNameLowerCamel}Service.findById(id);
+        return ResultGenerator.genSuccessResult(${modelNameLowerCamel});
+    }
+
+    @PostMapping("/list")
+    public Result list(Integer page, Integer size) {
+        PageHelper.startPage(page, size);
+        List<${modelNameUpperCamel}> list = ${modelNameLowerCamel}Service.findAll();
+        PageInfo pageInfo = new PageInfo(list);
+        return ResultGenerator.genSuccessResult(pageInfo);
     }
 }

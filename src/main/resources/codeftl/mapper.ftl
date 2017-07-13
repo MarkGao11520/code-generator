@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="${mapperPackage}.${modelNameUpperCamel}Repository">
-    <resultMap id="BaseResultMap" type="${entityPackage}.${modelNameUpperCamel}">
+<mapper namespace="${basePackage}.dao.${modelNameUpperCamel}Repository">
+    <resultMap id="BaseResultMap" type="${basePackage}.entity.${modelNameUpperCamel}">
     <#list columnList as item>
         <#if item.isKey>
             <id column="${item.colName}" jdbcType="${item.typeNameUpper}" property="${item.columnNameLowerCamel}"/>

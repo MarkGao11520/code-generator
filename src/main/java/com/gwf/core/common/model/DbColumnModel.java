@@ -89,10 +89,10 @@ public class DbColumnModel implements Serializable {
                 javaType = "Time";
                 break;
             case "datetime":
-                javaType = "Timestamp";
+                javaType = "Date";
                 break;
             case "timestamp":
-                javaType = "Timestamp";
+                javaType = "Date";
                 break;
         }
         return javaType;
