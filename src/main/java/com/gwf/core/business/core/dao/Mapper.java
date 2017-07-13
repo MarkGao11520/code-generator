@@ -1,4 +1,4 @@
-package com.gwf.core.business.core;
+package com.gwf.core.business.core.dao;
 
 import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.common.BaseMapper;

@@ -1,4 +1,4 @@
-package com.gwf.core.business.core;
+package com.gwf.core.business.core.service;
 
 import org.apache.ibatis.exceptions.TooManyResultsException;
 import tk.mybatis.mapper.entity.Condition;

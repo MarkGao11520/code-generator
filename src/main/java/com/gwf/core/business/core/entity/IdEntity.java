@@ -1,4 +1,4 @@
-package com.gwf.core.business.core;
+package com.gwf.core.business.core.entity;
 
 
 

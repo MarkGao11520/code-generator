@@ -4,7 +4,7 @@ package com.gwf.core.business.code.service.impl;
 import com.gwf.core.business.code.model.CodeSchema;
 import com.gwf.core.business.code.model.CodeTable;
 import com.gwf.core.business.code.service.CodeService;
-import com.gwf.core.business.core.ServiceException;
+import com.gwf.core.business.core.Exception.ServiceException;
 import com.gwf.core.common.component.FamilyDbUtils;
 import com.gwf.core.common.model.DbColumnModel;
 import com.gwf.core.common.model.DbTableModel;
@@ -25,7 +25,6 @@ import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 
@@ -85,7 +84,7 @@ public class CodeServiceImpl implements CodeService {
 
         if (null == codeSchema.getTables() && "".equals(codeSchema.getTables().trim()))
             throw new ServiceException("没有选择任何表！");
-        if(conn == null)
+        if (conn == null)
             throw new ServiceException("数据库连接错误！");
 
         String[] tables = codeSchema.getTables().split(",");
@@ -120,7 +119,7 @@ public class CodeServiceImpl implements CodeService {
                 tableModels.add(tableModel);
             }
         } catch (Exception e) {
-            throw new ServiceException("生成表模型错误",e);
+            throw new ServiceException("生成表模型错误", e);
         } finally {
             this.killConnection(rs, conn);
         }
@@ -134,7 +133,7 @@ public class CodeServiceImpl implements CodeService {
      * @param tableModels
      * @return
      */
-    private String productCodeFromTable(String author, String userId, String packageName, List<DbTableModel> tableModels) throws Exception{
+    private String productCodeFromTable(String author, String userId, String packageName, List<DbTableModel> tableModels) throws Exception {
 
         Map root = null;
         List<File> fileList = new ArrayList<File>();
@@ -153,45 +152,45 @@ public class CodeServiceImpl implements CodeService {
         dirF.deleteOnExit();
         zipFile.deleteOnExit();
         //生成
-            for (DbTableModel dbTableModel : tableModels) {
-                root = new HashMap<String, Object>();
-                String basePackage = packageName + "." + dbTableModel.getEntityName().toLowerCase();
-                root.put("author", author);
-                root.put("basePackage", basePackage);
-                root.put("corePackage", packageName + ".core");
-                root.put("table", dbTableModel);
-                //通过一个文件输出流，就可以写到相应的文件中
-                //1.entity , mapper
-                String newPath = dirPath + File.separator + dbTableModel.getEntityName().toLowerCase();
-                file = this.generateEntityModel(newPath, dbTableModel, root, "Entity");
-                fileList.add(file);
+        for (DbTableModel dbTableModel : tableModels) {
+            root = new HashMap<String, Object>();
+            String basePackage = packageName + "." + dbTableModel.getEntityName().toLowerCase();
+            root.put("author", author);
+            root.put("basePackage", basePackage);
+            root.put("corePackage", packageName + ".core");
+            root.put("table", dbTableModel);
+            //通过一个文件输出流，就可以写到相应的文件中
+            //1.entity , mapper
+            String newPath = dirPath + File.separator + dbTableModel.getEntityName().toLowerCase();
+            file = this.generateEntityModel(newPath, dbTableModel, root, "Entity");
+            fileList.add(file);
 
-                file = this.generateEntityModel(newPath, dbTableModel, root, "Mapper");
-                fileList.add(file);
-                //2.service
-                file = this.generateEntityModel(newPath, dbTableModel, root, "Service");
-                fileList.add(file);
-                //3.serviceImpl
-                file = this.generateEntityModel(newPath, dbTableModel, root, "ServiceImpl");
-                fileList.add(file);
-                //4.dao
-                file = this.generateEntityModel(newPath, dbTableModel, root, "Repository");
-                fileList.add(file);
-                //5.controller
-                file = this.generateEntityModel(newPath, dbTableModel, root, "Controller");
-                fileList.add(file);
-                //6.list jsp
+            file = this.generateEntityModel(newPath, dbTableModel, root, "Mapper");
+            fileList.add(file);
+            //2.service
+            file = this.generateEntityModel(newPath, dbTableModel, root, "Service");
+            fileList.add(file);
+            //3.serviceImpl
+            file = this.generateEntityModel(newPath, dbTableModel, root, "ServiceImpl");
+            fileList.add(file);
+            //4.dao
+            file = this.generateEntityModel(newPath, dbTableModel, root, "Repository");
+            fileList.add(file);
+            //5.controller
+            file = this.generateEntityModel(newPath, dbTableModel, root, "Controller");
+            fileList.add(file);
+            //6.list jsp
 
-                //7.list js
+            //7.list js
 
-                //8.add jsp
+            //8.add jsp
 
-                //9.add js
+            //9.add js
 
-                //10.core code
-                genCoreCode(fileList,dirPath);
-            }
-            ZipCompress.compressExe(zipDirPath, zipPath);
+            //10.core code
+            genCoreCode(fileList, dirPath);
+        }
+        ZipCompress.compressExe(zipDirPath, zipPath);
         return zipPath;
     }
 
@@ -268,32 +267,46 @@ public class CodeServiceImpl implements CodeService {
         return file;
     }
 
-    private void genCoreCode(List<File> fileList, String dirPath) throws Exception{
+    private void genCoreCode(List<File> fileList, String dirPath) throws Exception {
         File dir = new File(PROJECT_PATH + JAVA_PATH + "/com/gwf/core/business/core");
-        System.out.println(dir.getAbsolutePath());
+
+        dirPath+=File.separator+"core";
+        foreachDir(dir, fileList, dirPath);
+    }
+
+    private void foreachDir(File dir, List<File> fileList, String dirPath) throws Exception {
         File[] listFiles = dir.listFiles();
-        InputStreamReader reader = null;
-        OutputStreamWriter writer = null;
+
         for (File f : listFiles) {
-            try {
-                File fileDir = new File(dirPath + File.separator + "core");
-                File file = new File(dirPath + File.separator + "core"+File.separator+f.getName());
-                if(!fileDir.exists())
-                    fileDir.mkdirs();
-                if(!file.exists())
-                    file.createNewFile();
-                reader = new InputStreamReader(new FileInputStream(f));
-                writer = new OutputStreamWriter(new FileOutputStream(file));
-                char[] buffer = new char[1024];
-                while (reader.read(buffer) != -1)
-                    writer.write(buffer);
-                fileList.add(file);
-            }finally {
+
+            File file = null;
+            File fileDir = null;
+            if (f.isDirectory()) {
+                String newPath = dirPath + File.separator + f.getName();
+                foreachDir(f, fileList, newPath);
+            } else {
+                InputStreamReader reader = null;
+                OutputStreamWriter writer = null;
                 try {
-                    reader.close();
-                    writer.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
+                    fileDir = new File(dirPath + File.separator );
+                    file = new File(dirPath + File.separator + File.separator + f.getName());
+                    if (!fileDir.exists())
+                        fileDir.mkdirs();
+                    if (!file.exists())
+                        file.createNewFile();
+                    reader = new InputStreamReader(new FileInputStream(f));
+                    writer = new OutputStreamWriter(new FileOutputStream(file));
+                    char[] buffer = new char[1024];
+                    while (reader.read(buffer) != -1)
+                        writer.write(buffer);
+                    fileList.add(file);
+                } finally {
+                    try {
+                        reader.close();
+                        writer.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         }

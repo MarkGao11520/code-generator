@@ -1,9 +1,9 @@
 package com.gwf.core.config;
 
 import com.alibaba.fastjson.JSON;
-import com.gwf.core.business.core.Result;
-import com.gwf.core.business.core.ResultCode;
-import com.gwf.core.business.core.ServiceException;
+import com.gwf.core.business.core.result.Result;
+import com.gwf.core.business.core.result.ResultCode;
+import com.gwf.core.business.core.Exception.ServiceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Configuration;
