@@ -1,4 +1,4 @@
-package com.gwf.core.code.model;
+package com.gwf.core.business.code.model;
 
 
 
@@ -56,6 +56,20 @@ public class CodeSchema implements Serializable {
     private String driverClass;
 
     private String basePackage;
+
+    private String author;
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
 
     public String getBasePackage() {
         return basePackage;

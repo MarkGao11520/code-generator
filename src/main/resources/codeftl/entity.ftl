@@ -9,21 +9,21 @@ import java.util.Date;
 import java.util.List;
 
 /**
-* Created with ${author} on ${date}.
+* Created with ${author} on ${.now}.
 */
 @Entity
-@Table(name = "${table_name}")
-public class ${modelNameUpperCamel} extends IdEntity<${modelNameUpperCamel}> {
-    public ${modelNameUpperCamel}(){
+@Table(name = "${table.tableName}")
+public class ${table.entityName} extends IdEntity<${table.entityName}> {
+    public ${table.entityName}(){
     }
 
-    public ${modelNameUpperCamel}(<#list columnList as item><#if item_index!=0>,</#if>${item.javaType} ${item.columnNameLowerCamel}</#list>){
-    <#list columnList as item>
+    public ${table.entityName}(<#list table.columnModels as item><#if item_index!=0>,</#if>${item.javaType} ${item.columnNameLowerCamel}</#list>){
+    <#list table.columnModels as item>
         this.${item.columnNameLowerCamel}=${item.columnNameLowerCamel};
     </#list>
     }
 
-    <#list columnList as item>
+    <#list table.columnModels as item>
     <#if item.columnNameLowerCamel!='businessId'&&
          item.columnNameLowerCamel!='remarks'&&
          item.columnNameLowerCamel!='createBy'&&
@@ -36,7 +36,7 @@ public class ${modelNameUpperCamel} extends IdEntity<${modelNameUpperCamel}> {
     </#if>
     </#list>
 
-    <#list columnList as item>
+    <#list table.columnModels as item>
     <#if item.columnNameLowerCamel!='businessId'&&
          item.columnNameLowerCamel!='remarks'&&
          item.columnNameLowerCamel!='createBy'&&

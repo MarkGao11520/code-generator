@@ -1,11 +1,11 @@
 package ${basePackage}.service;
-import ${basePackage}.entity.${modelNameUpperCamel};
+import ${basePackage}.entity.${table.entityName};
 import ${corePackage}.Service;
 
 
 /**
- * Created by ${author} on ${date}.
+ * Created by ${author} on ${.now}.
  */
-public interface ${modelNameUpperCamel}Service extends Service<${modelNameUpperCamel}> {
+public interface ${table.entityName}Service extends Service<${table.entityName}> {
 
 }

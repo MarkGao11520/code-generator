@@ -1,8 +1,6 @@
-package com.gwf.core.core;
+package com.gwf.core.business.core;
 
 
-
-import com.gwf.core.common.util.IdGen;
 
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;

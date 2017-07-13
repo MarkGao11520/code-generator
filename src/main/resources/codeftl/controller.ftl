@@ -1,8 +1,8 @@
 package ${basePackage}.controller;
 import ${corePackage}.Result;
 import ${corePackage}.ResultGenerator;
-import ${basePackage}.entity.${modelNameUpperCamel};
-import ${basePackage}.service.${modelNameUpperCamel}Service;
+import ${basePackage}.entity.${table.entityName};
+import ${basePackage}.service.${table.entityName}Service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,42 +13,42 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 /**
-* Created by ${author} on ${date}.
+* Created by ${author} on ${.now}.
 */
 @RestController
-@RequestMapping("${baseRequestMapping}")
-public class ${modelNameUpperCamel}Controller {
+@RequestMapping("${table.entityName?uncap_first}")
+public class ${table.entityName}Controller {
     @Autowired
-    private ${modelNameUpperCamel}Service ${modelNameLowerCamel}Service;
+    private ${table.entityName}Service ${table.entityName?uncap_first}Service;
 
     @PostMapping("/add")
-    public Result add(${modelNameUpperCamel} ${modelNameLowerCamel}) {
-        ${modelNameLowerCamel}Service.save(${modelNameLowerCamel});
+    public Result add(${table.entityName} ${table.entityName?uncap_first}) {
+        ${table.entityName?uncap_first}Service.save(${table.entityName?uncap_first});
         return ResultGenerator.genSuccessResult();
     }
 
     @PostMapping("/delete")
     public Result delete(Integer id) {
-        ${modelNameLowerCamel}Service.deleteById(id);
+        ${table.entityName?uncap_first}Service.deleteById(id);
         return ResultGenerator.genSuccessResult();
     }
 
     @PostMapping("/update")
-    public Result update(${modelNameUpperCamel} ${modelNameLowerCamel}) {
-        ${modelNameLowerCamel}Service.update(${modelNameLowerCamel});
+    public Result update(${table.entityName} ${table.entityName?uncap_first}) {
+        ${table.entityName?uncap_first}Service.update(${table.entityName?uncap_first});
         return ResultGenerator.genSuccessResult();
     }
 
     @PostMapping("/detail")
     public Result detail(Integer id) {
-        ${modelNameUpperCamel} ${modelNameLowerCamel} = ${modelNameLowerCamel}Service.findById(id);
-        return ResultGenerator.genSuccessResult(${modelNameLowerCamel});
+        ${table.entityName} ${table.entityName?uncap_first} = ${table.entityName?uncap_first}Service.findById(id);
+        return ResultGenerator.genSuccessResult(${table.entityName?uncap_first});
     }
 
     @PostMapping("/list")
     public Result list(Integer page, Integer size) {
         PageHelper.startPage(page, size);
-        List<${modelNameUpperCamel}> list = ${modelNameLowerCamel}Service.findAll();
+        List<${table.entityName}> list = ${table.entityName?uncap_first}Service.findAll();
         PageInfo pageInfo = new PageInfo(list);
         return ResultGenerator.genSuccessResult(pageInfo);
     }

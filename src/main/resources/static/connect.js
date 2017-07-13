@@ -14,15 +14,14 @@ function connect() {
             password: $('#password').val()
         },
         success: function (result) {
-            if(result.success){
-                alert(result.message);
+            if(result.code==200){
+                alert("连接成功");
                 var str = '<br>';
-                var list = result.result;
+                var list = result.data;
                 for (var i = 0; i < list.length; i++)
                     str += (list[i].tableName+':<input type="checkbox" name="table" value="' + list[i].tableName + '">&nbsp;&nbsp;&nbsp;&nbsp;');
                 $('#tableDiv').append(str);
             }
-
         },
         error: function (error) {
             alert(JSON.stringify(error));
@@ -45,6 +44,6 @@ function generate() {
     if (str == "") {
         alert("您没有选择任何数据");
     } else {
-        window.location.href = './code/constructCode?ip=' + $('#ip').val() + '&db=' + $('#db').val() + '&port=' + $('#port').val() + '&dbName=' + $('#dbName').val() + '&username=' + $('#username').val() + '&password=' + $('#password').val() + '&tables=' + str + '&basePackage=' + $('#basepackage').val();
+        window.location.href = './code/constructCode?ip=' + $('#ip').val() + '&db=' + $('#db').val() + '&port=' + $('#port').val() + '&dbName=' + $('#dbName').val() + '&username=' + $('#username').val() + '&password=' + $('#password').val() + '&tables=' + str + '&basePackage=' + $('#basepackage').val()+'&author='+$('#author').val();
     }
 }

@@ -1,5 +1,6 @@
-package com.gwf.core.core;
+package com.gwf.core.business.core;
 
+import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.common.BaseMapper;
 import tk.mybatis.mapper.common.ConditionMapper;
 import tk.mybatis.mapper.common.IdsMapper;

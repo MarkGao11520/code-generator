@@ -213,7 +213,9 @@ public class DbColumnModel implements Serializable {
     public String getTypeNameUpper() {
         typeNameUpper = typeName.toUpperCase();
         if(typeNameUpper.equals("INT"))
-            typeNameUpper = "INTEGRE";
+            typeNameUpper = "INTEGER";
+        if(typeNameUpper.equals("DATETIME"))
+            typeNameUpper = "TIMESTAMP";
         return typeNameUpper;
     }
 

@@ -1,4 +1,4 @@
-package com.gwf.core.common.util;
+package com.gwf.core.business.core;
 
 import java.security.SecureRandom;
 import java.util.UUID;

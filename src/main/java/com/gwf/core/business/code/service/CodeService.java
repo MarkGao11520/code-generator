@@ -1,9 +1,9 @@
-package com.gwf.core.code.service;
+package com.gwf.core.business.code.service;
 
 
 
-import com.gwf.core.code.model.CodeSchema;
-import com.gwf.core.code.model.CodeTable;
+import com.gwf.core.business.code.model.CodeSchema;
+import com.gwf.core.business.code.model.CodeTable;
 
 import java.util.List;
 
@@ -25,5 +25,5 @@ public interface CodeService {
      * @param codeSchema
      * @return
      */
-    String generateCode(CodeSchema codeSchema);
+    String generateCode(CodeSchema codeSchema) throws Exception;
 }

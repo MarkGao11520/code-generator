@@ -1,4 +1,4 @@
-package com.gwf.core.core;
+package com.gwf.core.business.core;
 
 /**
  * 响应结果生成工具

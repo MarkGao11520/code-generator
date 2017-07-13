@@ -2,7 +2,7 @@ package com.gwf.core.common.component;
 
 import com.alibaba.druid.pool.DruidDataSource;
 
-import com.gwf.core.code.model.CodeSchema;
+import com.gwf.core.business.code.model.CodeSchema;
 import org.apache.ibatis.mapping.Environment;
 import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.SqlSession;

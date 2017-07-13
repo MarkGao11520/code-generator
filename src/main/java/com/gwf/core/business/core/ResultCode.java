@@ -1,4 +1,4 @@
-package com.gwf.core.core;
+package com.gwf.core.business.core;
 
 /**
  * 响应码枚举，参考HTTP状态码的语义

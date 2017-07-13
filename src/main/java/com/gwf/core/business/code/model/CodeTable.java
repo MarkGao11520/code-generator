@@ -1,4 +1,4 @@
-package com.gwf.core.code.model;
+package com.gwf.core.business.code.model;
 
 import java.io.Serializable;
 

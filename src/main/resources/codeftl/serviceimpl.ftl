@@ -1,8 +1,8 @@
 package ${basePackage}.service.impl;
 
-import ${basePackage}.dao.${modelNameUpperCamel}Repository;
-import ${basePackage}.entity.${modelNameUpperCamel};
-import ${basePackage}.service.${modelNameUpperCamel}Service;
+import ${basePackage}.dao.${table.entityName}Repository;
+import ${basePackage}.entity.${table.entityName};
+import ${basePackage}.service.${table.entityName}Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import ${corePackage}.AbstractService;
 import org.springframework.stereotype.Service;
@@ -11,12 +11,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 /**
- * Created by ${author} on ${date}.
+ * Created by ${author} on ${.now}.
  */
 @Service
 @Transactional
-public class ${modelNameUpperCamel}ServiceImpl extends AbstractService<${modelNameUpperCamel}> implements ${modelNameUpperCamel}Service {
+public class ${table.entityName}ServiceImpl extends AbstractService<${table.entityName}> implements ${table.entityName}Service {
     @Autowired
-    private ${modelNameUpperCamel}Repository ${modelNameLowerCamel}Repository;
+    private ${table.entityName}Repository ${table.entityName?uncap_first}Repository;
 
 }

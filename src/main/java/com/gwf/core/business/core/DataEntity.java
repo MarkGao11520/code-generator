@@ -1,4 +1,4 @@
-package com.gwf.core.core;
+package com.gwf.core.business.core;
 
 import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
