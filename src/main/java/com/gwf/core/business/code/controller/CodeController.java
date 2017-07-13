@@ -6,7 +6,7 @@ import com.gwf.core.business.code.model.CodeTable;
 import com.gwf.core.business.code.service.CodeService;
 import com.gwf.core.business.core.result.Result;
 import com.gwf.core.business.core.result.ResultGenerator;
-import com.gwf.core.business.core.Exception.ServiceException;
+import com.gwf.core.business.core.exception.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

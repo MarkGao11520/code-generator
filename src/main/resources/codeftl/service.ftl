@@ -1,6 +1,6 @@
 package ${basePackage}.service;
 import ${basePackage}.entity.${table.entityName};
-import ${corePackage}.Service;
+import ${corePackage}.service.Service;
 
 
 /**

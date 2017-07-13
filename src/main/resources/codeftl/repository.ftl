@@ -1,6 +1,6 @@
 package ${basePackage}.dao;
 
-import ${corePackage}.Mapper;
+import ${corePackage}.mapper.Mapper;
 import ${basePackage}.entity.${table.entityName};
 import org.springframework.stereotype.Repository;
 

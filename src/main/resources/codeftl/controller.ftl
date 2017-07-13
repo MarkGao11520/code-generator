@@ -1,6 +1,6 @@
 package ${basePackage}.controller;
-import ${corePackage}.Result;
-import ${corePackage}.ResultGenerator;
+import ${corePackage}.result.Result;
+import ${corePackage}.result.ResultGenerator;
 import ${basePackage}.entity.${table.entityName};
 import ${basePackage}.service.${table.entityName}Service;
 import com.github.pagehelper.PageHelper;

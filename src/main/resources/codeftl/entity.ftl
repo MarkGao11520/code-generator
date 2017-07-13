@@ -1,6 +1,6 @@
 package ${basePackage}.entity;
 
-import ${corePackage}.IdEntity;
+import ${corePackage}.entity.IdEntity;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;

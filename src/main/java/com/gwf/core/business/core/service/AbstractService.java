@@ -1,8 +1,8 @@
 package com.gwf.core.business.core.service;
 
 
-import com.gwf.core.business.core.dao.Mapper;
-import com.gwf.core.business.core.Exception.ServiceException;
+import com.gwf.core.business.core.mapper.Mapper;
+import com.gwf.core.business.core.exception.ServiceException;
 import org.apache.ibatis.exceptions.TooManyResultsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import tk.mybatis.mapper.entity.Condition;

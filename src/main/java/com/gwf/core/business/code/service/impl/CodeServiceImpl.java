@@ -4,7 +4,7 @@ package com.gwf.core.business.code.service.impl;
 import com.gwf.core.business.code.model.CodeSchema;
 import com.gwf.core.business.code.model.CodeTable;
 import com.gwf.core.business.code.service.CodeService;
-import com.gwf.core.business.core.Exception.ServiceException;
+import com.gwf.core.business.core.exception.ServiceException;
 import com.gwf.core.common.component.FamilyDbUtils;
 import com.gwf.core.common.model.DbColumnModel;
 import com.gwf.core.common.model.DbTableModel;
@@ -297,8 +297,9 @@ public class CodeServiceImpl implements CodeService {
                     reader = new InputStreamReader(new FileInputStream(f));
                     writer = new OutputStreamWriter(new FileOutputStream(file));
                     char[] buffer = new char[1024];
-                    while (reader.read(buffer) != -1)
-                        writer.write(buffer);
+                    int len;
+                    while ((len =reader.read(buffer)) != -1)
+                        writer.write(buffer,0,len);
                     fileList.add(file);
                 } finally {
                     try {
