@@ -26,6 +26,8 @@ public class DbTableModel implements Serializable{
 
     private String entityName;
 
+    private String mappingPath;
+
     public String getEntityName() {
         StringBuffer simpleEntity = new StringBuffer();
         boolean upPower = true;
@@ -46,6 +48,11 @@ public class DbTableModel implements Serializable{
         return simpleEntity.toString();
     }
 
+    public String getMappingPath() {
+        return tableNameConvertMappingPath(tableName);
+    }
+
+
     public void setEntityName(String entityName) {
         this.entityName = entityName;
     }
@@ -56,5 +63,10 @@ public class DbTableModel implements Serializable{
 
     public void setTableName(String tableName) {
         this.tableName = tableName;
+    }
+
+    private static String tableNameConvertMappingPath(String tableName) {
+        tableName = tableName.toLowerCase();//兼容使用大写的表名
+        return "/" + (tableName.contains("_") ? tableName.replaceAll("_", "/") : tableName);
     }
 }

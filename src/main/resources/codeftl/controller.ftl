@@ -16,7 +16,7 @@ import java.util.List;
 * Created by ${author} on ${.now}.
 */
 @RestController
-@RequestMapping("${table.entityName?uncap_first}")
+@RequestMapping("${table.mappingPath}")
 public class ${table.entityName}Controller {
     @Autowired
     private ${table.entityName}Service ${table.entityName?uncap_first}Service;

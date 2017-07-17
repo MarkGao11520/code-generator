@@ -1,10 +1,10 @@
 package ${basePackage}.entity;
 
-import ${corePackage}.entity.IdEntity;
+import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.persistence.*;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 
@@ -12,8 +12,9 @@ import java.util.List;
 * Created with ${author} on ${.now}.
 */
 @Entity
+@Data
 @Table(name = "${table.tableName}")
-public class ${table.entityName} extends IdEntity<${table.entityName}> {
+public class ${table.entityName} {
     public ${table.entityName}(){
     }
 
@@ -24,34 +25,13 @@ public class ${table.entityName} extends IdEntity<${table.entityName}> {
     }
 
     <#list table.columnModels as item>
-    <#if item.columnNameLowerCamel!='businessId'&&
-         item.columnNameLowerCamel!='remarks'&&
-         item.columnNameLowerCamel!='createBy'&&
-         item.columnNameLowerCamel!='createDate'&&
-         item.columnNameLowerCamel!='updateBy'&&
-         item.columnNameLowerCamel!='updateDate'&&
-         item.columnNameLowerCamel!='delFlag'&&
-         item.columnNameLowerCamel!='flag'>
-    private ${item.javaType} ${item.columnNameLowerCamel};
+    /** ${item.remarks} */
+    <#if item.isKey>
+    @Id
+    @GeneratedValue(generator = "UUID")
     </#if>
+    private ${item.javaType} ${item.columnNameLowerCamel};
     </#list>
 
-    <#list table.columnModels as item>
-    <#if item.columnNameLowerCamel!='businessId'&&
-         item.columnNameLowerCamel!='remarks'&&
-         item.columnNameLowerCamel!='createBy'&&
-         item.columnNameLowerCamel!='createDate'&&
-         item.columnNameLowerCamel!='updateBy'&&
-         item.columnNameLowerCamel!='updateDate'&&
-         item.columnNameLowerCamel!='delFlag'&&
-         item.columnNameLowerCamel!='flag'>
-    public ${item.javaType} get${item.columnNameUpperCamel}(){
-        return ${item.columnNameLowerCamel};
-    }
-    public void set${item.columnNameUpperCamel}(${item.javaType} ${item.columnNameLowerCamel}){
-        this.${item.columnNameLowerCamel}=${item.columnNameLowerCamel};
-    }
-    </#if>
-    </#list>
 }
 

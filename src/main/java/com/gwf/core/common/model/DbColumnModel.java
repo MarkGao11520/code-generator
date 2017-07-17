@@ -20,6 +20,8 @@ public class DbColumnModel implements Serializable {
 
     private String typeNameUpper; //类型名称
 
+    private String remarks;
+
 
     private int precision, isNull, dataType, scale; //精度,是否为空,类型,小数的位数
 
@@ -86,7 +88,7 @@ public class DbColumnModel implements Serializable {
                 javaType = "Date";
                 break;
             case "time":
-                javaType = "Time";
+                javaType = "Date";
                 break;
             case "datetime":
                 javaType = "Date";
@@ -153,6 +155,13 @@ public class DbColumnModel implements Serializable {
         return serialVersionUID;
     }
 
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
+    }
 
     public String getColName() {
         return colName;
@@ -230,6 +239,7 @@ public class DbColumnModel implements Serializable {
         try {
             String colName = rs.getString("COLUMN_NAME");//列名
             String typeName = rs.getString("TYPE_NAME");//类型名称
+            String remarks = rs.getString("REMARKS");
             int precision = rs.getInt("COLUMN_SIZE");//精度
             int isNull = rs.getInt("NULLABLE");//是否为空
             int dataType = rs.getInt("DATA_TYPE");//类型
@@ -241,6 +251,7 @@ public class DbColumnModel implements Serializable {
             this.setIsNull(isNull);
             this.setDataType(dataType);
             this.setScale(scale);
+            this.setRemarks(remarks);
         } catch (SQLException e) {
             throw e;
         }
